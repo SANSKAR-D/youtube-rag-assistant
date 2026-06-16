@@ -1,0 +1,19 @@
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+python-dotenv
+youtube-transcript-api
+
+# LangChain Core and Community utilities
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# Ollama integration
+langchain-ollama
+
+# Vector database choice (Chroma)
+chromadb
+langchain-chroma

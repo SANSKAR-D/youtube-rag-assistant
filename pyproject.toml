@@ -1,0 +1,2 @@
+[tool.pyrefly]
+python-interpreter = "c:\Users\seths\.venv\Scripts\python.exe"
