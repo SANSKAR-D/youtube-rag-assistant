@@ -33,7 +33,7 @@ def process_video(request: Annotated[VideoRequest, Query(...)]):
         raise HTTPException(status_code=404, detail="No transcript found for this video.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing video: {str(e)}")
-    return {"message": f"Successfully processed and stored embedded video: {video_id}", "storage_path": storage_path}
+    return {"message": f"Successfully processed and stored embedded video: {video_id}"}
 
 @app.post("/ask")
 def ask_question(request: Annotated[QueryRequest, Query(...)]):
