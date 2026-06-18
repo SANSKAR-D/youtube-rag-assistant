@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import './chat.css';
+import { Loader } from 'lucide-react';
 
 
 function Chat() {
     const location = useLocation();
     const navigate = useNavigate();
+    const messagesEndRef = useRef(null);
 
     const videoId = location.state?.videoId;
 
@@ -15,10 +18,28 @@ function Chat() {
     }
 
     const [query, setQuery] = useState("");
-    const [response, setResponse] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [messages, setMessages] = useState([]); 
+    const [messages, setMessages] = useState([
+        {
+            role: 'assistant',
+            text: "Hi! I'm your AI assistant.. What would you like to know about this video?"
+        }
+    ]);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });};
+        useEffect(() => {
+            scrollToBottom();
+        }, [messages]
+    );
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleAsk();
+        }
+    };
 
 
     const handleAsk = async () => {
@@ -31,10 +52,10 @@ function Chat() {
         setError("");
 
         try {
-            const res = await axios.post('http://localhost:8000/ask', { 
-                youtube_video_id: videoId, 
-                query: userMessage.text 
-            });
+            const res = await axios.post(
+    `http://localhost:8000/ask?youtube_video_id=${videoId}&query=${encodeURIComponent(userMessage.text)}`
+            );
+
             setMessages(prev => [...prev, { role: 'assistant', text: res.data.answer }]);
         } catch (err) {
             console.error("Error:", err);
@@ -54,13 +75,32 @@ function Chat() {
                     {messages.map((msg, index) => (
                         <div key={index} className={`message-row ${msg.role === 'user' ? 'user' : 'assistant'}`}>
                             <div className="message-bubble">
-                                {msg.text}
+                                {<ReactMarkdown>{msg.text}</ReactMarkdown>}
                             </div>
                         </div>
                     ))}
+                    <div ref={messagesEndRef} />
                 </div>
             </div>
-
+            <div className="chat-input-container">
+                <input 
+                    type="text" 
+                    placeholder="Ask a question about the video..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    disabled={loading}
+                />
+                <button 
+                    className="btn" 
+                    onClick={handleAsk}
+                    disabled={!query.trim() || loading}
+                >
+                    {loading ? <span className='loading-content'>
+                                <Loader className="spinner" size={20} />
+                                </span> : "Send"}
+                </button>
+            </div>
         </div>
     );
 }
