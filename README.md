@@ -4,6 +4,9 @@ A full-stack Retrieval-Augmented Generation (RAG) application that allows you to
 
 The app retrieves the video transcript, chunks and embeds the text, stores it in a local Chroma vector database, and uses an LLM to answer user questions in English, regardless of the original video language.
 
+### 📐 System Architecture
+![System Architecture](./Architecture.png)
+
 ---
 
 ## 🚀 Features
