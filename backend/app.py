@@ -1,10 +1,23 @@
 from typing import Annotated
+import os
 from fastapi import FastAPI, Query, HTTPException
 from pydantic import BaseModel, Field
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 from rag import embed_transcript,query_video
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[os.getenv("FRONTEND_URL")],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class VideoRequest(BaseModel):
     youtube_video_id: Annotated[str, Field(...,pattern=r"^[a-zA-Z0-9_-]{11}$",title="YouTube Video ID",description="The ID of the YouTube video to process")]

@@ -30,6 +30,11 @@ def embed_transcript(video_id:str,text:str)->str:
 
     dir = os.path.join(CHROMA_DIR,video_id)
 
+    if(os.path.exists(dir)):
+        return dir
+
+    os.makedirs(dir, exist_ok=True)
+
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size = 1000,
         chunk_overlap = 200,
