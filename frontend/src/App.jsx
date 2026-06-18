@@ -1,12 +1,13 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import { Play,Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const [videoID, setVideoId] = useState('');
   const [url,setUrl] = useState('');
   const [status,setStatus] = useState('');
   const [loading,setLoading]=useState(false);
+  const navigate = useNavigate();
   const handleLoadVideo = async () => {
   if (url === "" || loading) return;
   const videoID = url.split('v=')[1];
@@ -20,6 +21,7 @@ function App() {
     setStatus("Processing...");
     await axios.post('http://localhost:8000/process?youtube_video_id=' + videoID);
     setStatus("Video loaded successfully!\nPlease wait for the AI Assistant to Load");
+    navigate('/chat', { state: { videoId: videoID } });
   } catch (error) {
     console.error("Error processing video:", error);
     setStatus("Error loading video");

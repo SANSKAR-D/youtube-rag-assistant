@@ -1,13 +1,21 @@
 :root {
-  --background: #0f172a;      /* Dark background */
-  --card-bg: #1e293b;         /* Chat window & cards */
-  --primary: #38bdf8;         /* Cyan blue */
+  --background: #0f172a;
+  /* Dark background */
+  --card-bg: #1e293b;
+  /* Chat window & cards */
+  --primary: #38bdf8;
+  /* Cyan blue */
   --primary-hover: #0ea5e9;
-  --text: #f8fafc;            /* Text color */
-  --text-muted: #94a3b8;      /* Muted text color */
-  --border: #334155;          /* Card borders */
-  --user-bubble: #0ea5e9;     /* User chat bubble */
-  --bot-bubble: #334155;      /* Bot chat bubble */
+  --text: #f8fafc;
+  /* Text color */
+  --text-muted: #94a3b8;
+  /* Muted text color */
+  --border: #334155;
+  /* Card borders */
+  --user-bubble: #0ea5e9;
+  /* User chat bubble */
+  --bot-bubble: #334155;
+  /* Bot chat bubble */
 }
 
 body {
@@ -27,7 +35,7 @@ body {
 #root {
   width: 100%;
   height: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -51,12 +59,12 @@ header h1 {
   margin: 0;
   font-size: 4.5rem;
   font-weight: 800;
-  
+
   background: linear-gradient(to bottom, #ffffff 20%, var(--primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  
+
   filter: drop-shadow(0px 2px 8px rgba(56, 189, 248, 0.15));
 }
 
@@ -66,18 +74,19 @@ header p {
   margin: 5px 0 0 0;
   color: var(--text-muted);
 }
+
 .card {
   background: rgba(30, 41, 59, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  
+
   border: 1px solid rgba(56, 189, 248, 0.15);
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 20px;
   line-height: 1.6;
-  
-  
+
+
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -102,15 +111,15 @@ code {
   background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  
-  border: 2px solid rgba(40, 191, 255, 0.326); 
+
+  border: 2px solid rgba(40, 191, 255, 0.326);
   border-radius: 16px;
   padding: 18px;
   display: flex;
   gap: 14px;
   align-items: center;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
-  
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
   margin-top: 16%;
   margin-bottom: 10%;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -135,7 +144,7 @@ code {
 
 
 .input-card input::placeholder {
-  color: #64748b; 
+  color: #64748b;
 }
 
 .input-card input:focus {
@@ -146,7 +155,7 @@ code {
 
 
 .btn {
-  
+
   background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
   color: #ffffff;
   border: none;
@@ -187,15 +196,16 @@ code {
 }
 
 .yt-icon {
-  color: #ef4444; 
+  color: #ef4444;
   filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.3));
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 @keyframes spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -203,7 +213,7 @@ code {
 
 .spinner {
   animation: spin 1s linear infinite;
-  margin-right: 8px; 
+  margin-right: 8px;
 }
 
 .loading-content {
